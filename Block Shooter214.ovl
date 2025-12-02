@@ -1,0 +1,14 @@
+segments = [
+    # Usable low memory segments (below 0x0800)
+    (0x00fa, 0x0200, 0x0100, 0x0500, 0), # 0x200-0x2fa, 0x300-0x3fa, 0x400-0x4fa
+    (0x0200, 0x0500, None,   None,   0), # 0x500-0x700
+
+    # Explicitly mark the video RAM area (0x0800-0x7fff) as unusable (flags=7)
+    (0x7800, 0x0800, None,   None,   7), # 0x0800-0x7fff (nocode, nodata, noheap)
+
+    # Usable high memory segment (0x8000-0xffff)
+    (0x0030, 0x8000, None,   None,   7), # 0x8000-0x802f (unusable, protect page zero)
+    (0x01d0, 0x8030, None,   None,   0), # 0x8030-0x81ff (usable)
+    (0x0040, 0x8200, None,   None,   7), # 0x8200-0x823f (unusable, protect machine check code)
+    (0x7dbc, 0x8240, None,   None,   0)  # 0x8240-0xffff (usable, including stack space)
+]
